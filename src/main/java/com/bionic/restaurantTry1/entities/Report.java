@@ -1,31 +1,57 @@
 package com.bionic.restaurantTry1.entities;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Report {
 
 	private long countOrders;
-	
+
 	private double sumOrders;
-	
-	private java.sql.Timestamp startPeriod;
-	
-	private java.sql.Timestamp endPeriod;
-	
+
+	private Date day;
+
+	private LocalDateTime startPeriod;
+
+	private LocalDateTime endPeriod;
+
 	private String category;
-	
+
 	public Report() {
-		
+
 	}
-	
+
 	public Report(long countOrders, double sumOrders) {
 		super();
 		this.countOrders = countOrders;
 		this.sumOrders = sumOrders;
 	}
+
+	public Report(long countOrders, double sumOrders, Date day) {
+		super();
+		this.countOrders = countOrders;
+		this.sumOrders = sumOrders;
+		this.day = day;
+	}
 	
-	public Report(int countOrders, double sumOrders, Timestamp startPeriod,
-			Timestamp endPeriod, String category) {
+	public Report(long countOrders, double sumOrders, Date day, String category) {
+		super();
+		this.countOrders = countOrders;
+		this.sumOrders = sumOrders;
+		this.day = day;
+		this.category = category;
+	}
+
+	public Report(int countOrders, double sumOrders, LocalDateTime startPeriod,
+			LocalDateTime endPeriod) {
+		this.countOrders = countOrders;
+		this.sumOrders = sumOrders;
+		this.startPeriod = startPeriod;
+		this.endPeriod = endPeriod;
+	}
+
+	public Report(int countOrders, double sumOrders, LocalDateTime startPeriod,
+			LocalDateTime endPeriod, String category) {
 		this.countOrders = countOrders;
 		this.sumOrders = sumOrders;
 		this.startPeriod = startPeriod;
@@ -33,12 +59,12 @@ public class Report {
 		this.category = category;
 	}
 
-	public long getCountOrders() {
-		return countOrders;
+	public void setCountOrders(long countOrders) {
+		this.countOrders = countOrders;
 	}
 
-	public void setCountOrders(int countOrders) {
-		this.countOrders = countOrders;
+	public long getCountOrders() {
+		return countOrders;
 	}
 
 	public double getSumOrders() {
@@ -49,19 +75,27 @@ public class Report {
 		this.sumOrders = sumOrders;
 	}
 
-	public java.sql.Timestamp getStartPeriod() {
+	public Date getDay() {
+		return day;
+	}
+
+	public void setDay(Date day) {
+		this.day = day;
+	}
+
+	public LocalDateTime getStartPeriod() {
 		return startPeriod;
 	}
 
-	public void setStartPeriod(java.sql.Timestamp startPeriod) {
+	public void setStartPeriod(LocalDateTime startPeriod) {
 		this.startPeriod = startPeriod;
 	}
 
-	public java.sql.Timestamp getEndPeriod() {
+	public LocalDateTime getEndPeriod() {
 		return endPeriod;
 	}
 
-	public void setEndPeriod(java.sql.Timestamp endPeriod) {
+	public void setEndPeriod(LocalDateTime endPeriod) {
 		this.endPeriod = endPeriod;
 	}
 
@@ -76,9 +110,8 @@ public class Report {
 	@Override
 	public String toString() {
 		return "Report [countOrders=" + countOrders + ", sumOrders="
-				+ sumOrders + ", startPeriod=" + startPeriod + ", endPeriod="
+				+ sumOrders + " day=" + day + ", startPeriod=" + startPeriod + ", endPeriod="
 				+ endPeriod + ", category=" + category + "]";
 	}
-		
-	
+
 }

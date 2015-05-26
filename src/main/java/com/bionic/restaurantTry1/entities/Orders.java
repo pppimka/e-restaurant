@@ -1,6 +1,6 @@
 package com.bionic.restaurantTry1.entities;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -13,32 +13,32 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Orders {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="idCustomer")
+	@JoinColumn(name = "idCustomer")
 	private Customer customer;
-	
+
 	private String status;
-	
-	private Timestamp orderDateTime;
-	
+
+	private LocalDateTime orderDateTime;
+
 	private double totalPrice;
 	
-	private Timestamp statusTime;
-	
-	@OneToMany(mappedBy="order")
+	private LocalDateTime statusTime;
+
+	@OneToMany(mappedBy = "order")
 	private Collection<OrderDetail> orderDetail;
-	
+
 	public Orders() {
-		
+
 	}
 
 	public Orders(int id, Customer customer, String status,
-			Timestamp orderDateTime, double totalPrice) {
+			LocalDateTime orderDateTime, double totalPrice) {
 		super();
 		this.id = id;
 		this.customer = customer;
@@ -71,11 +71,11 @@ public class Orders {
 		this.status = status;
 	}
 
-	public Timestamp getOrderDateTime() {
+	public LocalDateTime getOrderDateTime() {
 		return orderDateTime;
 	}
 
-	public void setOrderDateTime(Timestamp orderDateTime) {
+	public void setOrderDateTime(LocalDateTime orderDateTime) {
 		this.orderDateTime = orderDateTime;
 	}
 
@@ -87,11 +87,11 @@ public class Orders {
 		this.totalPrice = totalPrice;
 	}
 
-	public Timestamp getStatusTime() {
+	public LocalDateTime getStatusTime() {
 		return statusTime;
 	}
 
-	public void setStatusTime(Timestamp statusTime) {
+	public void setStatusTime(LocalDateTime statusTime) {
 		this.statusTime = statusTime;
 	}
 
@@ -102,6 +102,4 @@ public class Orders {
 				+ totalPrice + ", statusTime=" + statusTime + "]";
 	}
 
-	
-		
 }

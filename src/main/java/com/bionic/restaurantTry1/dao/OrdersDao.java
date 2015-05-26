@@ -1,5 +1,6 @@
 package com.bionic.restaurantTry1.dao;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.bionic.restaurantTry1.entities.Orders;
@@ -9,9 +10,9 @@ public interface OrdersDao {
 	
 	public void addNewOrder(Orders order);
 
-	public Report getReport(java.sql.Timestamp startPeriod, java.sql.Timestamp endPeriod);
+	public List<Report> getReport(LocalDateTime startPeriod, LocalDateTime endPeriod);
 
-	public Report getReport(java.sql.Timestamp startPeriod, java.sql.Timestamp endPeriod, String category);
+	public List<Report> getReport(LocalDateTime startPeriod, LocalDateTime endPeriod, String category);
 	
 	public List<Orders> getOrdersForDelivery();
 	

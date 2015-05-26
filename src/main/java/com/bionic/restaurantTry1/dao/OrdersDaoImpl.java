@@ -1,6 +1,5 @@
 package com.bionic.restaurantTry1.dao;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,25 +26,35 @@ public class OrdersDaoImpl implements OrdersDao {
 	}
 
 	@Override
-	public Report getReport(java.sql.Timestamp startPeriod,
-			java.sql.Timestamp endPeriod) {
+	public List<Report> getReport(LocalDateTime startPeriod,
+			LocalDateTime endPeriod) {
 		String txt = "SELECT new com.bionic.restaurantTry1.entities.Report "
-				+ "(COUNT(o), SUM(o.totalPrice) ) " + "FROM Orders o"
-				+ " where o.orderDateTime between" + " \'" + startPeriod + "\'"
-				+ " and \'" + endPeriod + "\'";
+				+ "(COUNT(o), SUM(o.totalPrice), FUNC('DATE',o.orderDateTime)) FROM Orders o"
+				+ " where o.orderDateTime between ?1 and ?2"
+				+ " GROUP BY FUNC('DATE',o.orderDateTime) "
+				+ "ORDER BY FUNC('DATE',o.orderDateTime)";
+
 		TypedQuery<Report> query = em.createQuery(txt, Report.class);
-		return query.getSingleResult();
+
+		query.setParameter(1, startPeriod);
+		query.setParameter(2, endPeriod);
+		return query.getResultList();
 	}
 
 	@Override
-	public Report getReport(java.sql.Timestamp startPeriod, java.sql.Timestamp endPeriod, String category) {
+	public List<Report> getReport(LocalDateTime startPeriod,
+			LocalDateTime endPeriod, String category) {
 		String txt = "SELECT new com.bionic.restaurantTry1.entities.Report "
-				+ "(SUM(o.count), SUM(o.price * o.count) ) " + "FROM OrderDetail o"
-				+ " where o.order.orderDateTime between" + " \'" + startPeriod
-				+ "\'" + " and \'" + endPeriod + "\'"
-				+ " and o.dish.typeDish = " + "\"" + category + "\""; // group by category and date
+				+ "(SUM(o.count), SUM(o.price * o.count), FUNC('DATE',o.order.orderDateTime), "
+				+ "\"" + category + "\") "
+				+ " FROM OrderDetail o where o.order.orderDateTime between ?1 and ?2"
+				+ " and o.dish.typeDish = \"" + category + "\""
+				+ " GROUP BY FUNC('DATE',o.order.orderDateTime) "
+				+ " ORDER BY FUNC('DATE',o.order.orderDateTime)";
 		TypedQuery<Report> query = em.createQuery(txt, Report.class);
-		return query.getSingleResult();
+		query.setParameter(1, startPeriod);
+		query.setParameter(2, endPeriod);
+		return query.getResultList();
 	}
 
 	@Override
@@ -61,7 +70,7 @@ public class OrdersDaoImpl implements OrdersDao {
 	public void setStatusKitchenDone(Orders o) {
 		Orders order = em.find(Orders.class, o.getId());
 		order.setStatus("kitchen done");
-		order.setStatusTime(Timestamp.valueOf(LocalDateTime.now()));
+		order.setStatusTime(LocalDateTime.now());
 
 	}
 
@@ -69,7 +78,7 @@ public class OrdersDaoImpl implements OrdersDao {
 	public void setStatusNonKitchenDone(Orders o) {
 		Orders order = em.find(Orders.class, o.getId());
 		order.setStatus("non-kitchen done");
-		order.setStatusTime(Timestamp.valueOf(LocalDateTime.now()));
+		order.setStatusTime(LocalDateTime.now());
 
 	}
 
@@ -77,7 +86,7 @@ public class OrdersDaoImpl implements OrdersDao {
 	public void setStatusReadyForShipment(Orders o) {
 		Orders order = em.find(Orders.class, o.getId());
 		order.setStatus("ready for shipment");
-		order.setStatusTime(Timestamp.valueOf(LocalDateTime.now()));
+		order.setStatusTime(LocalDateTime.now());
 
 	}
 
@@ -85,7 +94,7 @@ public class OrdersDaoImpl implements OrdersDao {
 	public void setStatusDelivering(Orders o) {
 		Orders order = em.find(Orders.class, o.getId());
 		order.setStatus("delivering");
-		order.setStatusTime(Timestamp.valueOf(LocalDateTime.now()));
+		order.setStatusTime(LocalDateTime.now());
 
 	}
 
@@ -93,7 +102,7 @@ public class OrdersDaoImpl implements OrdersDao {
 	public void setStatusDelivered(Orders o) {
 		Orders order = em.find(Orders.class, o.getId());
 		order.setStatus("delivered");
-		order.setStatusTime(Timestamp.valueOf(LocalDateTime.now()));
+		order.setStatusTime(LocalDateTime.now());
 
 	}
 
