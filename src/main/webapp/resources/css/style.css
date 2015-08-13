@@ -1,0 +1,104 @@
+@CHARSET "UTF-8";
+
+a {
+	text-decoration: none;
+	color: #3c2415;
+}
+
+.header {
+	text-align: center;
+	padding-top: 1em;
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+}
+
+.front {
+	background: url("../pictures/milk-chocolate-brown-pattern.jpg");
+	background-color: black;
+	background-size: 100%;
+	color: #3c2415;
+	background-color: black;
+}
+
+.body {
+	margin-left: auto;
+	margin-right: auto;
+	width: 60em;
+	padding-left: 1em;
+	background: url("../pictures/beige-cream-background.jpg");
+	min-height: 38em;
+	position: relative;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.bottom {
+	position: absolute;
+	bottom: 0;
+	padding-top: 20px;
+	padding-bottom: 10px;
+	font-size: 4mm;
+}
+
+.menuButton.ui-button, .menuButton.ui-widget, .menuButton.ui-state-default,
+	.menuButton.ui-corner-all, .menuButton.ui-button-text-only {
+	color: #ffffff;
+	background: url("../pictures/milk-chocolate-brown-pattern.jpg");
+	border: none;
+	font-size: 4.8mm;
+	font-weight: normal;
+	letter-spacing: 1px;
+	color: #cec6ae;
+	height: 2.5em;
+	width: 10em;
+	color: #cec6ae;
+	letter-spacing: 1px;
+}
+
+.logOut.ui-commandlink, .logOut.ui-widget {
+	position: absolute;
+	right: 0;
+	padding-right: 25px;
+	bottom: 1px;
+	font-size: 5mm;
+	font-family: serif;
+}
+
+#smallCart {
+	height: 30px;
+	position: relative;
+	font-size: 20px;
+	padding-bottom: 5px;
+}
+
+.cartItems {
+	height: 30px;
+	position: absolute;
+	right: 0;
+	padding-right: 145px;
+}
+
+.home {
+	position: absolute;
+	right: 0;
+	padding-right: 90px;
+	bottom: 1px;
+}
+
+#cartPicture {
+	width: 30px;
+	height: 30px;
+	position: absolute;
+}
+
+#menu {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.lable.ui-state-error {
+	background: rgba(245, 222, 179, 0.);
+}

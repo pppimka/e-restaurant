@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<body>
+	<ui:composition>
+		<div class="cart" id="smallCart">
+			<a href="shoppingCart.xhtml" class="cartItems"> Cart <h:graphicImage style="width: 30px; height: 30px; padding-right: 2px"
+					id="cartPicture" value="/pictures/basket-4.png" /> <p:outputLabel
+					value="#{shoppingCart.list.size()}" />
+			</a> <a href="homePage.xhtml" class="home"> Home </a>
+			<p:commandLink href="authorizationCustomer.xhtml" styleClass="logOut"
+				rendered="#{accessBean.checkCustomerRights()}"
+				action="#{accessBean.customerLogOut()}" > Log out </p:commandLink>
+			<p:commandLink action="#{accessBean.customerLogOut()}"
+				styleClass="logOut"
+				rendered="#{accessBean.checkCustomerRights() != true}"> Log in </p:commandLink>
+		</div>
+	</ui:composition>
+
+</body>
+</html>

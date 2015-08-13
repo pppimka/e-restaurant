@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Home page</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body class="front">
+	<h:form id="forUpdate">
+		<div class="body">
+			<div class="header">
+				<div>
+					<ui:insert name="header">
+						<ui:include src="../templates/header.xhtml" />
+					</ui:insert>
+				</div>
+				<div>
+					<ui:insert name="cart">
+						<ui:include src="../templates/cart.xhtml" />
+					</ui:insert>
+				</div>
+				<div>
+					<ui:insert name="navigation">
+						<ui:include src="../templates/navigation.xhtml" />
+					</ui:insert>
+				</div>
+			</div>
+			<br />
+			<div>
+				Hello, #{customerBean.customer.name}
+
+				<p>Main information</p>
+				<h:form>
+					<h:panelGrid columns="1">
+						<h:dataTable value="#{customerBean.customer}" var="customer"
+							border="1">
+							<h:column>
+								<f:facet name="header">Name</f:facet>
+					#{customer.name}
+				</h:column>
+
+							<h:column>
+								<f:facet name="header">Surname</f:facet>
+					#{customer.surname}
+				</h:column>
+
+							<h:column>
+								<f:facet name="header">Address</f:facet>
+					#{customer.address}
+				</h:column>
+
+							<h:column>
+								<f:facet name="header"></f:facet>
+								<h:commandButton action="#{customerBean.editInformation()}"
+									value="Edit information"></h:commandButton>
+							</h:column>
+
+						</h:dataTable>
+
+					</h:panelGrid>
+
+				</h:form>
+				#{customerBean.getOrders()}
+				<p>Previous orders</p>
+				<h:outputText rendered="#{customerBean.orderList.isEmpty()}"
+					value="You haven't done order yet!" />
+				<h:form>
+					<p:dataTable id="orders"
+						rendered="#{!customerBean.orderList.isEmpty()}"
+						value="#{customerBean.orderList}" var="order" border="1">
+						<p:column>
+							<h:outputText value="Date of order: " />
+							<h:outputText value="#{order.orderDateTime.toLocalDate()}">
+							</h:outputText>
+						</p:column>
+
+						<p:column>
+							<h:outputText value="Sum: " />
+							<h:outputText value="#{order.totalPrice}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+				<div>
+					<ui:insert name="bottom">
+						<ui:include src="../templates/bottom.xhtml" />
+					</ui:insert>
+				</div>
+			</div>
+		</div>
+	</h:form>
+</h:body>
+</html>

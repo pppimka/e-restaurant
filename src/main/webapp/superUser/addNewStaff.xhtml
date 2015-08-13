@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>New staff</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body class="front">
+	<div class="body">
+		<div class="header">
+			<div>
+				<ui:insert name="header">
+					<ui:include src="../templates/header.xhtml" />
+				</ui:insert>
+			</div>
+			<div class="cart" id="smallCart">
+				<p:commandLink ctionListener="#{accessBean.staffLogOut()}"
+					action="/authorizationStaff.xhtml?faces-redirect=true"
+					styleClass="logOut"
+					rendered="#{accessBean.checkStaffSuperUserRights()}"> Log out </p:commandLink>
+			</div>
+		</div>
+		<h1>New staff</h1>
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputText value="Name: " />
+				<p:inputText id="name" value="#{staffBean.staff.name}"
+					required="true">
+				</p:inputText>
+
+
+				<h:outputText value="Surname: " />
+				<p:inputText id="surname" value="#{staffBean.staff.surname}"
+					required="true">
+				</p:inputText>
+
+				<h:outputText value="Phone number: " />
+				<p:inputMask id="phNumber" value="#{staffBean.staff.phoneNumber}"
+					mask="(999)999-99-99" required="true">
+				</p:inputMask>
+
+				<h:outputText value="Address: " />
+				<p:inputText id="address" value="#{staffBean.staff.address}"
+					required="true">
+				</p:inputText>
+
+				<h:outputText value="Email: " />
+				<p:inputText id="email" value="#{staffBean.staff.email}"
+					required="true">
+				</p:inputText>
+
+				<h:outputText value="Login: " />
+				<p:inputText id="login" value="#{staffBean.staff.login}"
+					required="true">
+				</p:inputText>
+
+				<h:outputText value="Password:  " />
+				<p:password id="password" value="#{staffBean.staff.password}"
+					required="true">
+				</p:password>
+
+				<h:outputText value="Role: " />
+				<p:selectOneMenu value="#{staffBean.staff.role}" required="true">
+					<f:selectItem itemValue="adm" itemLabel="Administrator" />
+					<f:selectItem itemValue="shef" itemLabel="Shef" />
+					<f:selectItem itemValue="deliver" itemLabel="Delivery man" />
+					<f:selectItem itemValue="analyst" itemLabel="Analyst" />
+					<f:selectItem itemValue="superUser" itemLabel="Super user" />
+				</p:selectOneMenu>
+
+
+				<h:outputText value="Active status: " />
+				<p:selectOneMenu value="#{staffBean.staff.activeStatus}"
+					required="true">
+					<f:selectItem itemValue="t" itemLabel="True" checked="true" />
+					<f:selectItem itemValue="f" itemLabel="False" />
+				</p:selectOneMenu>
+
+			</h:panelGrid>
+			<p:commandButton value="Save" action="#{staffBean.saveStaff()}" />
+
+		</h:form>
+		<div>
+			<ui:insert name="bottom">
+				<ui:include src="../templates/bottom.xhtml" />
+			</ui:insert>
+		</div>
+	</div>
+</h:body>
+</html>

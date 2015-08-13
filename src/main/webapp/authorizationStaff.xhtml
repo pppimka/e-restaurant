@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Staff authorization</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body class="front">
+	<div class="body">
+		<div class="header">
+			<div>
+				<ui:insert name="header">
+					<ui:include src="/templates/header.xhtml" />
+				</ui:insert>
+			</div>
+
+		</div>
+		<h1>Authorization</h1>
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputText value="Login:" />
+				<h:inputText id="login" value="#{staffAuthorizationBean.login}"
+					required="true">
+				</h:inputText>
+
+				<h:outputText value="Password:" />
+				<h:inputSecret id="password"
+					value="#{staffAuthorizationBean.password}" required="true">
+				</h:inputSecret>
+
+			</h:panelGrid>
+			<h:commandButton value="Submit"
+				action="#{staffAuthorizationBean.authorize(staffAuthorizationBean.login, staffAuthorizationBean.password)}" />
+		</h:form>
+		<div>
+			<ui:insert name="bottom">
+				<ui:include src="templates/bottom.xhtml" />
+			</ui:insert>
+		</div>
+	</div>
+</h:body>
+</html>

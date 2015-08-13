@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Staff</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body class="front">
+	<div class="body">
+		<div class="header">
+			<div>
+				<ui:insert name="header">
+					<ui:include src="../templates/header.xhtml" />
+				</ui:insert>
+			</div>
+			<div class="cart" id="smallCart">
+				<p:commandLink ctionListener="#{accessBean.staffLogOut()}"
+					action="/authorizationStaff.xhtml?faces-redirect=true"
+					styleClass="logOut"
+					rendered="#{accessBean.checkStaffSuperUserRights()}"> Log out </p:commandLink>
+			</div>
+		</div>
+		<h1>All staff</h1>
+
+		#{staffBean.getAllStaff()}
+		<h:form>
+			<h:panelGrid columns="1">
+				<h:commandButton value="Add new staff"
+					action="#{staffBean.addNewStaff()}" />
+
+				<h:dataTable value="#{staffBean.listStaff}" var="staff" border="1">
+
+					<h:column>
+						<f:facet name="header">Name</f:facet>
+					#{staff.name}
+				</h:column>
+
+					<h:column>
+						<f:facet name="header">Surname</f:facet>
+					#{staff.surname}
+				</h:column>
+
+					<h:column>
+						<f:facet name="header">Active status</f:facet>
+					#{staff.activeStatus}
+				</h:column>
+
+					<h:column>
+						<f:facet name="header">Role</f:facet>
+					#{staff.role}
+				</h:column>
+
+					<h:column>
+						<f:facet name="header"></f:facet>
+						<h:commandButton action="#{staffBean.editStaff(staff.id)}"
+							value="Edit"></h:commandButton>
+					</h:column>
+
+					<h:column>
+						<h:commandButton rendered="#{staff.activeStatus eq 't'}"
+							action="#{staffBean.setActiveStatusFalse(staff.id)}"
+							value="Disable">
+						</h:commandButton>
+						<h:commandButton rendered="#{staff.activeStatus eq 'f'}"
+							action="#{staffBean.setActiveStatusTrue(staff.id)}"
+							value="Activate">
+						</h:commandButton>
+						<h:commandButton value="Edit password"
+							action="#{staffBean.editPassword(staff.id)}" />
+					</h:column>
+
+				</h:dataTable>
+
+			</h:panelGrid>
+
+		</h:form>
+		<div>
+			<ui:insert name="bottom">
+				<ui:include src="../templates/bottom.xhtml" />
+			</ui:insert>
+		</div>
+	</div>
+</h:body>
+</html>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Beverages</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body class="front">
+	<h:form id="forUpdate">
+		<div class="body">
+			<div class="header">
+				<div>
+					<ui:insert name="header">
+						<ui:include src="../templates/header.xhtml" />
+					</ui:insert>
+				</div>
+				<div>
+					<ui:insert name="cart">
+						<ui:include src="../templates/cart.xhtml" />
+					</ui:insert>
+				</div>
+				<div>
+					<ui:insert name="navigation">
+						<ui:include src="../templates/navigation.xhtml" />
+					</ui:insert>
+				</div>
+			</div>
+			<div>
+				<br /> #{dishBean.getListSalads()}
+				<h:form>
+					<p:dataGrid var="dish" value="#{dishBean.listDishes}" columns="3"
+						layout="grid" style="text-align:center">
+						<f:facet name="header">
+          		Select salad
+          		       		</f:facet>
+						<p:panel header="#{dish.nameDish}" style="text-align:center">
+							<h:panelGrid columns="1" style="width:100%">
+								<h:outputText value="#{dish.description}" />
+
+								<h:outputText value="Count: " />
+								<p:spinner id="count" value="#{shoppingCart.count}" min="1"
+									max="100" style="width=20px">
+								</p:spinner>
+								<p:commandButton value="Add to cart"
+									actionListener="#{shoppingCart.addToCart(dish.id, shoppingCart.count)}"
+									process="@this, count" oncomplete="PF('cd').show()">
+
+								</p:commandButton>
+								<p:dialog widgetVar="cd" header="Added to the card" modal="true"
+									showEffect="fade" hideEffect="fade" resizable="false">
+									<p:commandButton value="Continue shopping"
+										onclick="PF('cd').hide()" />
+									<p:commandButton
+										action="shoppingCart.xhtml?faces-redirect=true"
+										value="Go to cart" />
+
+								</p:dialog>
+							</h:panelGrid>
+						</p:panel>
+					</p:dataGrid>
+				</h:form>
+			</div>
+			<div>
+				<ui:insert name="bottom">
+					<ui:include src="../templates/bottom.xhtml" />
+				</ui:insert>
+			</div>
+		</div>
+	</h:form>
+</h:body>
+</html>
