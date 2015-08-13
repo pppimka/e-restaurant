@@ -20,6 +20,7 @@
 		<jsf.version>2.1.13</jsf.version>
 	</properties>
 	<dependencies>
+	
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -161,6 +162,7 @@
 		</dependency>
 
 	</dependencies>
+	
 	<repositories>
 		<repository>
 			<id>primefaces-repository</id>
