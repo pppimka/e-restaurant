@@ -1,2 +1,2 @@
-Development web-restaurant
+<h1>Development web-restaurant</h1>
 Site for ordering food with separate pages for different staff like administrator, business analyst, security officer etc. Development of whole application based on 3-tier architecture including database development using Apache Derby, implementation of database tier using EclipseLink, application tier using Spring IoC, presentation tier using JSF, Primefaces, build automation using Maven tool.
